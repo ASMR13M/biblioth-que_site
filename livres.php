@@ -1,7 +1,5 @@
 <?php
-require_once "db.php"; // Connexion à la base
-
-// --- AJOUTER un livre ---
+require_once "db.php";
 if (isset($_POST['ajouter'])) {
     $titre = $_POST['titre'];
     $auteur = $_POST['auteur'];

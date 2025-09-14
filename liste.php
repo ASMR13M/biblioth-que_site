@@ -1,8 +1,7 @@
 <?php
-require_once "db.php"; // Connexion
+require_once "db.php";
 $pageTitle = "Liste de lecture";
 
-// --- AJOUTER un emprunt ---
 if (isset($_POST['ajouter'])) {
     $id_lecteur = (int) $_POST['id_lecteur'];
     $id_livre   = (int) $_POST['id_livre'];
@@ -14,8 +13,6 @@ if (isset($_POST['ajouter'])) {
     header("Location: liste.php?id_lecteur=$id_lecteur");
     exit;
 }
-
-// --- SUPPRIMER un emprunt ---
 if (isset($_GET['supprimer'])) {
     $id_livre   = (int) $_GET['supprimer'];
     $id_lecteur = (int) $_GET['lecteur'];
@@ -27,15 +24,12 @@ if (isset($_GET['supprimer'])) {
     exit;
 }
 
-// --- RÉCUPÉRER les lecteurs ---
 $stmt = $pdo->query("SELECT * FROM lecteurs ORDER BY nom ASC");
 $lecteurs = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-// --- RÉCUPÉRER les livres disponibles ---
+//RÉCUPÉRER les livres disponibles 
 $stmt = $pdo->query("SELECT * FROM livres ORDER BY titre ASC");
 $livres = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-// --- RÉCUPÉRER les emprunts du lecteur sélectionné ---
 $emprunts = [];
 $lecteur_actuel = null;
 if (isset($_GET['id_lecteur'])) {

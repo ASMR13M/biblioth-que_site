@@ -1,8 +1,7 @@
 <?php
-require_once "db.php"; // Connexion à la base
+require_once "db.php";
 $pageTitle = "Gestion des lecteurs";
 
-// --- AJOUTER un lecteur ---
 if (isset($_POST['ajouter'])) {
     $nom = $_POST['nom'];
     $prenom = $_POST['prenom'];
@@ -15,7 +14,6 @@ if (isset($_POST['ajouter'])) {
     exit;
 }
 
-// --- SUPPRIMER un lecteur ---
 if (isset($_GET['supprimer'])) {
     $id = (int) $_GET['supprimer'];
     $stmt = $pdo->prepare("DELETE FROM lecteurs WHERE id = ?");
@@ -25,7 +23,6 @@ if (isset($_GET['supprimer'])) {
     exit;
 }
 
-// --- MODIFIER un lecteur ---
 if (isset($_POST['modifier'])) {
     $id = (int) $_POST['id'];
     $nom = $_POST['nom'];
@@ -39,7 +36,6 @@ if (isset($_POST['modifier'])) {
     exit;
 }
 
-// --- LISTE DES LECTEURS ---
 $stmt = $pdo->query("SELECT * FROM lecteurs ORDER BY id DESC");
 $lecteurs = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
